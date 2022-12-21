@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+<link rel="stylesheet" type="text/css" href="{% static 'css/admin.css' %}"> 
+<link rel="icon" type="image/x-icon" href="{% static 'pics/favicon.png' %}">
+</head>
+<body>
+
+<div >
+  <!--<h2>Hoverable Sidenav Buttons</h2>
+  <p>Hover over the buttons in the left side navigation to open them.</p>-->
+  <center><h2><img src="{% static 'pics/logo.png' %}"style="width: 150px; height: 150px; justify-content: top;"></h2></center>
+</div>
+<div class="sidenav">
+  <a href="#"><img src="{% static 'pics/draft44.jpg' %}" style="width: 150px; height: 150px;border-radius: 50%"></a>
+  <a href="#"><i class="fa-solid fa-house"></i>Home</a>
+  <button class="dropdown-btn">Users
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="demo.php">Enterpreneur</a>
+    <a href="adminsupplier.php">Supplier</a>
+    <a href="admincustomer.php">Customer</a>
+  </div>
+  <!--<a href="admincategory.php">Category</a>-->
+  <!--<a href="#services">Services</a>-->
+  <button class="dropdown-btn">Categories 
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="admincategory.php">Material Supply </a>
+    <a href="admincategory1.php">Entreprenuer </a>
+  </div>
+  <button class="dropdown-btn">Sub-Categories 
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="#">Material supply </a>
+    <a href="#">Entreprenuer </a>
+  </div>
+  <a href="admintodo.php">To-do</a>
+  <a href=admincalender.php><i class="fa fa-calendar" aria-hidden="true"></i>Calender</a>
+
+  <a href="logout.php">logout<i class="fa fa-sign-out" aria-hidden="true"></i></a>
+</div>
+<!-- home -->
+<hr>
+<div style="margin-left:15%;">
+  <!-- View Main Category  -->
+  <form method="post">
+    <label for="dropdown">View Main Category</label>
+    <select name="dropdown" id="dropdown">
+      {% for i in main %}
+        <option value="{{i.name}}">{{i.name}}<select name="dropdown" id="dropdown">
+          {% for j in cat %}
+            <option value="{{j.name}}">{{j.name}}</option>
+          {% endfor %}
+        </select></option>
+        
+      {% endfor %}
+    </select>
+    <input type="submit" value="Submit">
+  </form>
+  
+  <!-- View  Category  
+  <form method="post">
+    <label for="dropdown">View Main Category</label>
+    <select name="dropdown" id="dropdown">
+      {% for i in main %}
+        <option value="{{i.name}}">{{i.name}}</option>
+      {% endfor %}
+    </select>
+    <input type="submit" value="Submit">
+  </form>
+  -->
+  <!-- <form method="post">
+  {% for i in main %}
+    <h2>{{ i.name }}</h2>
+    <ul>
+        {% for j in i.cat %}
+            <li>{{ j.name }}</li>
+        {% endfor %}
+    </ul>
+{% endfor %}
+</form> -->
+</div>
+<script>
+/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+</script>
+</body>
+</html>
