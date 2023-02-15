@@ -1,0 +1,180 @@
+body {
+  font-family: "Lato", sans-serif;
+}
+
+/* Fixed sidenav, full height */
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #CD5C5C ;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+/* Style the sidenav links and the dropdown button */
+.sidenav a, .dropdown-btn {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #F5CBA7;
+  display: block;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+
+/* On mouse-over */
+.sidenav a:hover, .dropdown-btn:hover {
+  color: #f1f1f1;
+}
+
+/* Main content */
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+  font-size: 20px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+/* Add an active class to the active dropdown button */
+.active {
+  /*background-color: green;*/
+  color: white;
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+  display: none;
+  background-color: #CD5C5C;
+  padding-left: 8px;
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+  float: right;
+  padding-right: 8px;
+}
+
+/* Some media queries for responsiveness */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+.customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.customers td, .customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.customers tr:nth-child(even){background-color: #f2f2f2;}
+
+.customers tr:hover {background-color: #ddd;}
+
+.customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+.seller{
+  color: inherit;
+}
+
+#seller{
+  position: absolute;
+  margin-left: 200px;
+  justify-content: left;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  z-index: 1;
+  background: #fff;
+  opacity: 0;
+  /*transition: 0.6s;*/
+}
+#seller:target {
+  height: 100%;
+  opacity: 1;
+}
+.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: white;
+}
+
+.flex-container > div {
+  background-color: white;
+  width: 100px;
+  margin: 10px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 30px;
+}
+.grid3{
+			
+  display:grid;
+  grid-template-columns:300px 300px 300px 300px;
+  grid-column-gap:10px;
+  grid-row-gap: 10px;
+  padding: 10px;
+  /* background-color: #CCD1D1 ; */
+  justify-content: center;
+  align-items: center;
+
+}
+.grid{
+  display:grid; 
+  background-color: #EBF5FB ;
+  padding: 20px;
+  text-align: center;
+  justify-content: center;
+  margin-left:20%;
+}
+
+.badge_active a {
+  padding: 8px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  background-color: #35a700;
+  color: white;
+  border-radius: 5px;
+}
+.badge_deactive a{
+ 
+  padding: 8px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  background-color: #f57d7d;
+  color: white;
+  border-radius: 5px;
+}
+.badge_delete a{
+  padding: 8px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  background-color: #d31818;
+  color: white;
+  border-radius: 5px;
+}
+
+.box{
+  border-style: solid;
+  border-color: rgb(133, 180, 133);
+}

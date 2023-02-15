@@ -16,6 +16,7 @@ if($con===false){
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <link rel="stylesheet" type="text/css" href="admin.css"> <style>  
 </style>
 <link rel="stylesheet" type="text/css" href="admin.css">
+<link rel="icon" type="image/x-icon" href="icon.png">
 </head>
 <body>
 
@@ -43,6 +44,7 @@ if($con===false){
   </button>
   <div class="dropdown-container">
     <a href="admincategory1.php">Manage Categories </a>
+    <a href="subsub_cat.php">subCategories </a>
   </div>
   <!-- <button class="dropdown-btn">Sub-Categories 
     <i class="fa fa-caret-down"></i>
@@ -57,7 +59,7 @@ if($con===false){
 
   <a href="logout.php">logout   <i class="fa fa-sign-out" aria-hidden="true"></i></a>
 </div>
-<!-----------------------------------------------------------------home ------------------------------------->
+<!-----------------------------------------------------------------dash board ------------------------------------->
 <hr>
 <div style="margin-left:15%;">
 <section>
@@ -113,7 +115,7 @@ if($con===false){
 		</div>
 	</section>
 </div>
-<!----------------------------------------------- seller(Enterprenuers------------------------------------------------------->
+<!---------------------------------------------- ------------------------------------------------------->
 
 <script>
 /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
