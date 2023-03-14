@@ -8503,7 +8503,7 @@ h1, h2, h3, h4, h5,
 
 	</head>
 	<body>
-		
+  <?php include 'admin_sidenav.php'?>
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">

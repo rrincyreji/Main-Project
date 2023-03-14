@@ -19,46 +19,7 @@ if($con===false){
 <link rel="icon" type="image/x-icon" href="icon.png">
 </head>
 <body>
-
-<div >
-  <!--<h2>Hoverable Sidenav Buttons</h2>
-  <p>Hover over the buttons in the left side navigation to open them.</p>-->
-  <center><h2><img src="logo.png"style="width: 150px; height: 150px; justify-content: top;"></h2></center>
-</div>
-<div class="sidenav">
-  <a href="#"><img src="draft44.jpg" style="width: 150px; height: 150px;border-radius: 50%"></a>
-  <a href="#">Hi, ADMIN</a><br>
-  <a href="#"><i class="fa fa-home" aria-hidden="true"></i>   Home</a>
-  <button class="dropdown-btn"><i class="fa fa-users" aria-hidden="true"></i>   Users
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    <a href="demo.php">Enterpreneur</a>
-    <a href="adminsupplier.php">Supplier</a>
-    <a href="admincustomer.php">Customer</a>
-  </div>
-  <!-- <a href="admincategory1.php"> Main Category</a> -->
-  <!--<a href="#services">Services</a>-->
-  <button class="dropdown-btn">Category
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    <a href="admincategory1.php">Manage Categories </a>
-    <a href="subsub_cat.php">subCategories </a>
-  </div>
-  <!-- <button class="dropdown-btn">Sub-Categories 
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    <a href="#">Material supply </a>
-    <a href="#">Entreprenuer </a>
-  </div> -->
-  <a href="admintodo.php"><i class="fa fa-tasks" aria-hidden="true"></i>   To-do</a>
-  <a href=admincalender.php><i class="fa fa-calendar" aria-hidden="true"></i>   Calender</a>
-  <a href=bot.php><i class="fa fa-android" aria-hidden="true"></i></i>   Chat Bot</a>
-
-  <a href="logout.php">logout   <i class="fa fa-sign-out" aria-hidden="true"></i></a>
-</div>
+<?php include 'admin_sidenav.php'?>
 <!-----------------------------------------------------------------dash board ------------------------------------->
 <hr>
 <div style="margin-left:15%;">

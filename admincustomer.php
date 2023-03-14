@@ -18,6 +18,33 @@ session_start();
 if($con===false){
     die("ERROR: Could not connect.".mysqli_connect_error());
 }
+
+
+if(isset($_GET['type']) && $_GET['type']!=''){
+  $type=($_GET['type']);
+
+  if($type=='status'){
+    $operation=($_GET['operation']);
+    $id=($_GET['id']);
+
+    if($operation=='active'){
+      $status='1';
+    }
+    else{
+      $status='0';
+    }
+    $update_status="UPDATE profile_ SET status='$status'where id='$id'";
+    mysqli_query($con,$update_status);
+
+  }
+  if($type=='delete'){
+    $id=($_GET['id']);
+
+    $delete_sql="DELETE FROM  profile_ where id='$id'";
+    mysqli_query($con,$delete_sql);
+
+  }
+}
 #if(isset($_POST["sname"]))
 #{
 #$name=$_POST["name"];
@@ -37,75 +64,75 @@ if($con===false){
    ?>
 <body>
 
-<div style="position: sticky;" >
-  <!--<h2>Hoverable Sidenav Buttons</h2>
-  <p>Hover over the buttons in the left side navigation to open them.</p>-->
-  <center><h2><img src="logo.png"style="width: 150px; height: 150px; "></h2></center>
-</div>
 
 <!------------------------------------------------------------------------------------------------>
 
-<div class="sidenav">
-  <a href="#"><img src="av.jpg" style="width: 150px; height: 150px;"></a>
-  <a href="adminhome.php">home</a>
-  <button class="dropdown-btn">users
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    <a href="demo.php">Enterpreneur</a>
-    <a href="adminsupplier.php" >supplier</a>
-    <a href="#">customer</a>
-  </div>
-  <a href="#about">About</a>
-  <a href="#services">Services</a>
-  <a href="#clients">Clients</a>
-  <a href="#contact">Contact</a>
-  <button class="dropdown-btn">Dropdown 
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
-  </div>
-  <a href="reg.php">logout</a>
-</div>
+<?php include 'admin_sidenav.php'?>
 
+<!------------------------------------------------------------------------------------------------>
 
 <!-------------------------------Registered Customers------------------------------>
 <hr>
 <div style="margin-left:15%;">
       <form action="" class="form">
         <div class="input-group"><br>
-          <p><center><h3>Registered Customers</h3></center><br>
+          <p><center><h3>Profile Created Users </h3></center><br>
   <div>
-      <table class="customers"style="margin-left:0px;" ><thead>
+      <table class="customers"style="margin-left:0px;" >
+        <thead>
          <tr>
+            <th>Sl.no</th>
             <th>Email</th>
-            <th>role</th>
-            <th>view</th>
+            <th>Role</th>
+            <th>Action</th>
+            <th>View Profile</th> 
+
          </tr>
          </thead>
 
 <?php 
-  $sql="SELECT  `email`, `role` from registration_s where role ='Customer'";
+  //$sql="SELECT  `email`, `role` from registration_s where role ='Customer'";
+ 
+  $sql="SELECT * from profile_, registration_s where profile_.user_id= registration_s.registration_id ";
   $res=mysqli_query($con,$sql);
   $count=mysqli_num_rows($res);
   if($count>0){ 
   //get and display
+  $i=0;
   while($row=mysqli_fetch_assoc($res)) {
+    $i++;
+    $email=$row['email'];
+    $role=$row['role'];
+  $action=$row['status'];
   $email=$row['email'];
-  $role=$row['role'];
+  $rid=$row['id'];
   ?>
   <tr>
-     <td><?php  echo $email; ?></td>
-     <td><?php  echo $role; ?></td>
+    <td style="color:black;"><?php  echo $i; ?></td>
+     <td style="color:black;"><?php  echo $email; ?></td>
+     <td style="color:black;"><?php  echo $role; ?></td>
+     <td> <?php
+           if ($action==0){
+           // echo "<span class='badge_active'><a href='?type=status&operation=deactive&id=".$rid."'>Active </a></span>";
+            echo "<span class='badge_deactive'><a href='?type=status&operation=active&id=".$rid."'>Pending </a></span>";
+           } 
+           else{
+            //echo "<span class='badge_deactive'><a href='?type=status&operation=active&id=".$rid."'>Deactive </a></span>";
+            echo "<span class='badge_active'><a href='?type=status&operation=deactive&id=".$rid."'>Approved </a></span>";
+           }
+           //echo "<span class='badge_delete'>&nbsp&nbsp&nbsp&nbsp<a href='?type=delete&id=".$row['id']."'> Delete</a></span>";
+           #echo "&nbsp<a href='addCategory.php?id=".$row['category_id']."'> Edit </a>";
+         ?>
+         </td>
      <td>
-     <form type="submit" value="#" name="ViewProfile" action="adminCustomerProfile.php" method="POST"> 
-      <button type="submit" value="#" name="viewProfile">View</button>
+    
+      <!-- <button>View<a href="vue.php?user=<?php echo $row['id'] ?>"></button> -->
+      <a class="badge_delete" href="admin_viewprofile.php?user=<?php echo $row['id'] ?>" target="_blank" >view</a>
+
+          </a>
        </form>
     </td>
- </form>
+ 
  </tr>
 <?php 
             

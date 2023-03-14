@@ -27,31 +27,7 @@ if($con===false){
 
 <!------------------------------------------------------------------------------------------------>
 
-<div class="sidenav">
-  <a href="#"><img src="av.jpg" style="width: 150px; height: 150px;"></a>
-  <a href="adminhome.php">home</a>
-  <button class="dropdown-btn">users
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    <a href="demo.php">Enterpreneur</a>
-    <a href="adminsupplier.php" >supplier</a>
-    <a href="#">customer</a>
-  </div>
-  <a href="#about">About</a>
-  <a href="#services">Services</a>
-  <a href="#clients">Clients</a>
-  <a href="#contact">Contact</a>
-  <button class="dropdown-btn">Dropdown 
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
-  </div>
-  <a href="reg.php">logout</a>
-</div>
+<?php include 'admin_sidenav.php'?>
 
 
 <!-------------------------------Registered Customers------------------------------>
