@@ -59,7 +59,7 @@ if(!isset($_SESSION["email"])){
         ?>
             <div class="col-md-3">
                 <div class="similar-product">
-                <a href="cust_productview.php?products=<?php echo $row['product_id'];?>"><img class="w-100" src="<?php echo $row['image1']?>" alt="Preview"></a>
+                <a href="cust_productview.php?products=<?php echo $row['product_id'];?>"><img class="w-100" src="pics/<?php echo $row['image1']?>" alt="Preview"></a>
                     <p class="title"><?php echo $row['p_name']?></p>
                     <p class="price">₹ <?php echo $row['price']?></p>
                 </div>
