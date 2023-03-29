@@ -8,151 +8,85 @@ if($con===false){
     die("ERROR: Could not connect.".mysqli_connect_error());
 }
 
-
-if(isset($_GET['type']) && $_GET['type']!=''){
-  $type=($_GET['type']);
-
-  if($type=='status'){
-    $operation=($_GET['operation']);
-    $id=($_GET['id']);
-
-    if($operation=='ship'){
-      $status='1';
+if(isset($_SESSION['email'])){
+    $email=$_SESSION['email'];
     }
-
-    elseif($operation=='deliver'){
-      $status='2';
+    if(isset($_GET['type']) && $_GET['type']!=''){
+      $type=($_GET['type']);
+    
+      if($type=='status'){
+        $operation=($_GET['operation']);
+        $id=($_GET['id']);
+    
+        if($operation=='ship'){
+          $status='1';
+        }
+    
+        elseif($operation=='deliver'){
+          $status='2';
+        }
+        else{
+          $status='0';
+        }
+        $update_status="UPDATE order_items set order_status='$status'where id='$id'";
+        mysqli_query($con,$update_status);
+    
+      }
+      if($type=='delete'){
+        $id=($_GET['id']);
+    
+        $delete_sql="DELETE FROM  order_items where id='$id'";
+        mysqli_query($con,$delete_sql);
+    
+      }
+      if($type=='review'){
+        $id=$_GET['id'];
+        
+        header('Location:vue.php?id=<?php echo $id?>');
+        die();
+        // $delete_sql="DELETE FROM  order_items where id='$id'";
+        // mysqli_query($con,$delete_sql);
+    
+      }
     }
-    else{
-      $status='0';
-    }
-    $update_status="UPDATE order_items set order_status='$status'where id='$id'";
-    mysqli_query($con,$update_status);
-
-  }
-  if($type=='delete'){
-    $id=($_GET['id']);
-
-    $delete_sql="DELETE FROM  order_items where id='$id'";
-    mysqli_query($con,$delete_sql);
-
-  }
-//   if($type=='Edit'){
-//     $id=($_GET['id']);
-
-//     $edit_status="UPDATE product set status='$status'where product_id='$id'";
-//     mysqli_query($con,$edit_sql);
-//     header('Location:seller_addproducts.php');
-//     die();  
-
-//   }
-}
-// if(isset($_POST['cate'])){
-
-//   $subcatname = $_POST['sub_cat'];
-//   $duplicate=mysqli_query($con,"SELECT * FROM product WHERE p_name='$subcatname'");
-//   if(mysqli_num_rows($duplicate)>0){
-//   echo"<script> alert('already exist')</script>";
-  
-//   }
-  
-//   }
-// $email= $_SESSION['email'];
-// $sql="SELECT * FROM registration_s where email='$email'";
-//         $result=$con->query($sql);
-//         $count=1;
-//         //if($result->num_rows > 0){
-//           while($row=$result->fetch_assoc()){
-//             $user_id=$row["registration_id"];
-//   $sql="SELECT * FROM product where reg_id='$user_id' ORDER BY p_name";
-//   $res=mysqli_query($con,$sql);
-//   $count=mysqli_num_rows($res);
-    //if($count>0){
-?>
+    ?>
 <!DOCTYPE html>
 <html>
 <head>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />  
+<link rel="stylesheet" type="text/css" href="supplier.css"> 
+<link rel="icon" type="image/x-icon" href="icon.png">
 <?php
     include_once './templatesheader.php';
     ?>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="style.css">
-<link rel="icon" type="image/x-icon" href="icon.png">
-<style>
-#mySidenav a {
-  position: absolute;
-  left: -80px;
-  transition: 0.3s;
-  padding: 15px;
-  width: 100px;
+    <style>
+    .button {
+  background-color: #85C1E9 ; /* Blue*/
+  border: none;
+  color: white;
+  text-align: center;
+  padding: 8px 10px;
   text-decoration: none;
-  font-size: 20px;
-  color: white;
-  border-radius: 0 5px 5px 0;
+  display: inline-block;
+  font-size: 14px;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 15px;
 }
-
-#mySidenav a:hover {
-  left: 0;
-}
-
-.profile {
-  top: 20px;
-  background-color: #9FE2BF;
-}
-
-.orders {
-  top: 100px;
-  background-color: #40E0D0;
-}
-
-.Analytics {
-  top: 180px;
-  background-color: #6495ED;
-}
-
-.feedback {
-  top: 260px;
-  background-color: #66C479;
-}
-
-.logout {
-  top: 320px;
-  background-color: #DE3163;
-}
-.customers {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.customers td, .customers th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-.customers tr:nth-child(even){background-color: #f2f2f2;}
-
-.customers tr:hover {background-color: #ddd;}
-
-.customers th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #04AA6D;
-  color: white;
+.button:hover {
+  background-color: #1F999C;
 }
 </style>
 </head>
-<body style="background-color:white;">
-
-<div id="mySidenav" class="sidenav">
-  <a href="customer_dashboard.php" class="profile">Create profile</a>
-  <a href="customerProfileView.php" class="orders">view profile</a>
-  <a href="cust_orders.php" class="Analytics">View orders</a>
-  <!-- <a href="#" class="feedback">feedback</a> -->
-  <a href="index.php" class="logout">logout</a>
-</div> 
-<div style="margin-left:15%;">
+<body>
+<?php
+            include_once './cust_navbar.php';
+            include_once './cust_sidebar.php';
+        ?>
+        <div style="margin-left:15%;">
 <div class="container" style="transform: translateY(-525px);">
             <!-- your content here -->
             <div class="row">
@@ -161,8 +95,11 @@ if(isset($_GET['type']) && $_GET['type']!=''){
    
 <div class="row">
 
-<h2>Order Details</h2>
+<h2>Order History</h2>
+<!-- <a href="generate_pdf.php" target="_blank">Download PDF</a> -->
+<button class="button" onclick="window.open('generate_pdf.php','_blank')">Download PDF</button>
 <div class="col-md-12 grid-margin stretch-card">
+
 <div <div class="table-responsive">
 <table class="table table-striped table-borderless">
       
@@ -170,71 +107,70 @@ if(isset($_GET['type']) && $_GET['type']!=''){
         <th>Sl_no</th>
         <th>Image </th>
         <th> Product name</th>
-        <!-- <th> Customer name</th> -->
-        <!-- <th colspan="5"> Description </th> -->
+        <th>Brand Name</th>
+        <th> Order Date </th>
         <th>Qty</th>
         <th>Size</th>
         <th>Product price</th>
-        <th>Order Status </th>
-        <th>Action</th>
+         <th>Total </th>
+        <th> Order Status</th> 
+        <th> Action</th> 
       </tr>
       <?php
-      $email= $_SESSION['email'];
-$sql="SELECT * FROM registration_s where email='$email'";
-        $result=$con->query($sql);
-        $count=1;
-        //if($result->num_rows > 0){
-          while($row=$result->fetch_assoc()){
-            $user_id=$row["registration_id"];
-  $sql="SELECT * FROM product p, order_items o,size s where p.reg_id='$user_id' and p.product_id=o.product_id  and p.size=s.size_id ORDER BY p.p_name";
-  $res=mysqli_query($con,$sql);
-  $count=mysqli_num_rows($res);
-    //if($count>0){
-?>
-    
-        <?php 
-        $i=0;
-        while($row=mysqli_fetch_assoc($res)){ $i++;?>
+                        $grand_total=0;
+                        $i=0;
+                        $email=$_SESSION['email'];
+
+                    $sql3 = mysqli_query($con,"SELECT product.image1 as image1, product.p_name as p_name, profile_.brand as brand, orders.order_date as order_date, order_items.quantity as quantity, size.name_ as name_, product.price as price, order_items.order_status as order_status ,order_items.id as id FROM order_items,product,orders,size,profile_ where order_items.product_id =product.product_id and product.reg_id=profile_.user_id and order_items.order_id=orders.order_id and product.size=size.size_id and orders.user_id=(select registration_id from registration_s where email='$email')");
+                        while ($row = mysqli_fetch_array($sql3)) {
+                        $sub_total = $row['quantity'] * $row['price'];
+                        $grand_total += $sub_total;
+                        $i++;
+                    ?>
+  
         <tr>
           <td><?php echo $i ?></td>
           <td><img src= " pics/<?php echo $row['image1'];?>"class="img-fluid product-image" alt="" width=100 px; height=100px;></td>
-          <td><?php echo $row['p_name'] ?></td>
-          
-          <!-- <td colspan="5"><?php echo $row['ddesc'] ?></td> -->
-          <td><?php echo $row['quantity'] ?></td>
+          <td><?= $row['p_name'] ?></td>
+          <td><?= $row['brand'] ?></td>
+          <td ><?php echo $row['order_date'] ?></td>
+          <td><?= $row['quantity'] ?></td>
           <td><?php echo $row['name_'] ?></td>
-          <td>₹&nbsp;<?php echo $row['price'] ?>.00</td>
-          
+          <td>₹&nbsp;<?= $row['price'] ?>.00</td>
+          <td>₹&nbsp;<?= $sub_total ?>.00</td>
           <td><?php
            if ($row['order_status']==0){
-            echo "<span class='badge_active'><a href='?type=status&operation=ship&id=".$row['id']."'>Processing </a></span>";
+            
+            echo "<span class='badge_active'>Ordered</span>";
+           // echo "<span class='badge_active'><a href='?type=status&operation=ship&id=".$row['id']."'>Processing </a></span>";
             // echo "<span><a style='color:green; size=10px;' href='?type=status&operation=deactive&id=".$row['product_id']."'><i class='i bi-toggle2-on'></i>Active</a></span>";
            } 
            elseif(($row['order_status']==1)){
-            echo "<span class='badge_active'><a href='?type=status&operation=deliver&id=".$row['id']."'>Shipped </a></span>";
+            echo "<span class='badge_active'>Shipped</span>";
             // echo "<span><a style='color:#FC6E7F; href='?type=status&operation=active&id=".$row['product_id']."'><i class='bi bi-toggle2-off'></i>Deactive</a></span>";
             
            }
            else{
-            echo "<span class='badge_deactive'><a href='?type=status&operation=deliver&id=".$row['id']."'>Delivered </a></span>";
+            echo "<span class='badge_deactive'>Delivered </span>";
            }
           //  echo "<span class='badge_delete'>&nbsp&nbsp&nbsp&nbsp<a href='?type=delete&id=".$row['product_id']."'> Delete</a></span>";
 
           // echo "<span>&nbsp&nbsp&nbsp&nbsp<a style='color:red;' href='?type=delete&id=".$row['product_id']."'> <i class='bi bi-x-circle'></i></a></span>";
          ?> </td>
+          
           <td>
           <?php
            if ($row['order_status']==0){
-            echo "<span class='badge_deactive'><a href='?type=delete&id=".$row['id']."'>Cancel </a></span>";
+            echo "<span class='badge_deactive'><a href='?type=delete&id=".$row['id']."'>Delete </a></span>";
             // echo "<span><a style='color:green; size=10px;' href='?type=status&operation=deactive&id=".$row['product_id']."'><i class='i bi-toggle2-on'></i>Active</a></span>";
            } 
            elseif(($row['order_status']==1)){
-            echo "<span class='badge_deactive'><a href='?type=delete&id=".$row['id']."'>Cancel </a></span>";
+            echo "<span class='badge_deactive'><a href='?type=delete&id=".$row['id']."'>Delete </a></span>";
             // echo "<span><a style='color:#FC6E7F; href='?type=status&operation=active&id=".$row['product_id']."'><i class='bi bi-toggle2-off'></i>Deactive</a></span>";
             
            }
            else{
-            echo "<span class='badge_active'><a href='?type=status&operation=deliver&id=".$row['id']."'>Review </a></span>";
+            echo "<span class='badge_active'><a href='vue.php?id=".$row['id']."'>Review </a></span>";
            }
           //  echo "<span class='badge_delete'>&nbsp&nbsp&nbsp&nbsp<a href='?type=delete&id=".$row['product_id']."'> Delete</a></span>";
 
@@ -244,7 +180,7 @@ $sql="SELECT * FROM registration_s where email='$email'";
         <?php 
             
     }
-    }
+    
   //else{
     ?>
 <!-- <tr>
@@ -312,6 +248,5 @@ for (i = 0; i < dropdown.length; i++) {
     <?php
     include_once './templatescripts.php';
 ?>
-
 </body>
-</html> 
+</html>

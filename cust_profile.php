@@ -1,19 +1,20 @@
 <?php
-#required('top.inc.php');
-session_start();
-#required('top.inc.php');
-$con=mysqli_connect("localhost","root","","project");
+// #required('top.inc.php');
+// session_start();
+// #required('top.inc.php');
+// $con=mysqli_connect("localhost","root","","project");
 
-if($con===false){
-    die("ERROR: Could not connect.".mysqli_connect_error());
-}
-if(!isset($_SESSION["email"])){
-  header("location:loginpage.php");
-}
-if(isset($_SESSION['email'])){
-    $email=$_SESSION['email'];
-}
+// if($con===false){
+//     die("ERROR: Could not connect.".mysqli_connect_error());
+// }
+// if(!isset($_SESSION["email"])){
+//   header("location:loginpage.php");
+// }
+// if(isset($_SESSION['email'])){
+//     $email=$_SESSION['email'];
+// }
 ?>
+<?php include'templatesession.php'?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,9 +35,9 @@ if(isset($_SESSION['email'])){
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
   <!-- ----------------------------------------------------------------------------------------------------------------- -->
-  <style>
+  <!-- <style>
   body {
-    background:#AED6F1 
+    background:#AED6F1; 
 }
 
 .form-control:focus {
@@ -79,7 +80,7 @@ if(isset($_SESSION['email'])){
     cursor: pointer;
     border: solid 1px #BA68C8
 }
-</style>
+</style> -->
 </head>
 <body>
   <!-- header -->

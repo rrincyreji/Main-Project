@@ -123,13 +123,24 @@ if(isset($_SESSION['email'])){
             <div class="product-title text-bold my-3">
             <?php echo $row['p_name']?>
             </div>
-
+            <?php if($row['qty']>10){
+           // echo " In Stock";
+           echo "<span style='color:green;'>In stock</span>";
+          }
+            elseif($row['qty']==0){
+              //echo"Out of Stock";
+              echo "<span style='color:red;'>Out of stock</span>";
+            }
+            else{
+              echo "<span style='color:red;'>only&nbsp;".$row['qty']."&nbsp;left&nbsp;!!!</span>";
+            }
+            ?>
 
             <div class="price-area my-4">
                 <!-- <p class="old-price mb-1"><del>$100</del>
                     <span class="old-price-discount text-danger">(20% off)</span></p> -->
 
-                <p class="new-price text-bold mb-1">₹<?php echo $row['price']?></p>
+                <p class="new-price text-bold mb-1">₹<?php echo $row['price']?>.00</p>
                 <p class="text-secondary mb-1">(Additional tax may apply on checkout)</p>
 
             </div>
@@ -210,7 +221,7 @@ if(isset($_SESSION['email'])){
                     <div class="product-wrapper mb-45 text-center"> 
                         <div class="product-img"> 
                             <a href="#" data-abc="true"> <img src="pics/<?php echo $row['image1']?>" alt="" width="100%" height="100%"> </a>	
-                                <span class="text-center"><i class="fa fa-rupee"></i> <?php echo $row['price']?></span> 
+                                <span class="text-center"><i class="fa fa-rupee"></i> <?php echo $row['price']?>.00</span> 
                                 <p class="title"><h5><?php echo $row['p_name']?></h5></p>
                                 <div class="product-action"> 
                         <div class="product-action-style"> 
